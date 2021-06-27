@@ -1,0 +1,12 @@
+# Ishaq's Store
+## Deployed Link
+[Nitfly](https://goofy-lumiere-1689a7.netlify.app/)
+
+## GitHub PR
+
+
+[First PR](https://github.com/IshaqAlathamneh/storefront/pull/1)
+
+
+## UML 
+<img src="./img/lab36.png" style="width: 200px">
