@@ -44,16 +44,42 @@ let init = {
 }
 export default (state = init, action) => {
     let {type, payload} = action;
-    let {products, active} = state;
-    console.log('in prof store');
+    let {products, show, active} = state;
+    console.log('in prof store', products);
 
     switch (type) {
         case 'SHOW':
-            let show = products.filter(item=>{
-                return item.category == payload;
+            let showw = products.filter(item=>{
+                return item.category == payload && item.inventoryCount >0;
             })
-            return{products, show, active: payload};
-    
+            return{products, show: showw, active: payload};
+        case 'ADD':
+            let newEdit = products.map(el => {
+                if (el.name === payload.name) {
+                    el.inventoryCount--
+                    console.log('in prod reduer add type', el);
+                }
+                return el;
+            })
+            let show2 = show.filter(item=>{
+                return item.inventoryCount >0;
+            })
+            return {products: newEdit, show: show2, active}
+        case "DELETE":
+            console.log('in the delete',payload);
+            let newProd = products.map(el => {
+                if (el.name == payload.name) {
+                    let inv = init.products.filter(x => x.name == payload.name)
+                    console.log('asdasdasd',inv);
+                    el.inventoryCount++
+                }
+                return el;
+            })
+            let showw3= newProd.filter(item=>{
+                return item.category == active && item.inventoryCount >0;
+            })
+            console.log('in the delete',newProd);
+            return {products: [...newProd], show: showw3, active}
         default:
             return state;
     }
