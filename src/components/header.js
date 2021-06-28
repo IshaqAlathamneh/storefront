@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Cart from './cart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,14 +30,9 @@ export default function MenuAppBar() {
             Ishaq's Store
           </Typography>
             <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <ShoppingCartIcon />
-              </IconButton>
+              
+                <Cart/>
+              
             </div>
         </Toolbar>
       </AppBar>

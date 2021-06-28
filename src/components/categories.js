@@ -4,12 +4,20 @@ import {choose} from '../store/categories'
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { filter } from '../store/products'
+import { filter } from '../store/products';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    textAlign: 'center',
+  },
+}));
 function Categories(props) {
 
+  const classes = useStyles()
 
-  return (
+  return (<>
     <Paper square>
       <Tabs
         value="FOOD"
@@ -23,6 +31,10 @@ function Categories(props) {
           })}
       </Tabs>
     </Paper>
+    <Paper elevation={1} className={classes.title}>
+      <h1>{props.categories.active}</h1>
+    </Paper>
+    </>
   );
 }
 
