@@ -1,10 +1,10 @@
 let init = [{
-    name: 'Apples',
+    item: 'Apples',
     description: 'fruit',
     price: 5,
     category: 'FOOD',
-    inventoryCount: 5,
-    src: 'https://source.unsplash.com/random?Apples',
+    inventory: 5,
+    image: 'https://source.unsplash.com/random?Apples',
     quantity: 1
 }]
 
@@ -15,14 +15,14 @@ export default ( state = init, action) =>{
         case "ADD":
             let checked = false;
             state.forEach(x => {
-                if (x.name == payload.name) {
+                if (x.item == payload.item) {
                     checked = true;
                 }
             })
             if(checked){
                 console.log('in checked');
                 return state.map(el => {
-                    if (el.name == payload.name) {
+                    if (el.item == payload.item) {
                         el.quantity +=1
                     }
                     return el
@@ -34,7 +34,7 @@ export default ( state = init, action) =>{
         case "DELETE":
             let ids = false;
             let newState = state.map(el => {
-                if (el.name == payload.name) {
+                if (el.item == payload.item) {
                     el.quantity--
                     if (el.quantity == 0) {
                         ids = true;
@@ -43,7 +43,7 @@ export default ( state = init, action) =>{
                 return el;
             })
             if (ids) {
-                return state.filter(ele => ele.name != payload.name)
+                return state.filter(ele => ele.item != payload.item)
             }
             console.log('---', payload.quantity);
             return newState;

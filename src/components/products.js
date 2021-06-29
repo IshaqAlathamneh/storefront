@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import {useDispatch, useSelector} from 'react-redux';
 import {add} from '../store/cart'
+import { getRemoteData } from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +28,9 @@ const Products = (props) => {
 
     const classes = useStyles();
     const dispatch = useDispatch({add})
-
+    useEffect(() => {
+        dispatch(getRemoteData())
+    }, [])
 
     return (
 
@@ -49,12 +52,12 @@ const Products = (props) => {
                                                 component="img"
                                                 alt="Contemplative Reptile"
                                                 height="140"
-                                                image={item.src}
+                                                image={item.image}
                                                 title="Contemplative Reptile"
                                             />
                                             <CardContent>
                                                 <Typography gutterBottom variant="h5" component="h2">
-                                                    {item.name}
+                                                    {item.item}
                                                 </Typography>
                                                 <Typography variant="body2" color="textSecondary" component="p">
                                                     {item.description}

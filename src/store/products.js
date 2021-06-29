@@ -1,41 +1,41 @@
 let food = [{
-    name: 'Apples',
+    item: 'Apples',
     description: 'fruit',
     price: 5,
     category: 'FOOD',
-    inventoryCount: 5,
-    src: 'https://source.unsplash.com/random?Apples'
+    inventory: 5,
+    image: 'https://source.unsplash.com/random?Apples'
 }, {
-    name: 'Calzones',
+    item: 'Calzones',
     description: 'Fast Food',
     price: 20,
     category: 'FOOD',
-    inventoryCount: 30,
-    src: 'https://source.unsplash.com/random?Calzones'
+    inventory: 30,
+    image: 'https://source.unsplash.com/random?Calzones'
 }]
 let elec = [{
-    name: 'Keyboard',
+    item: 'Keyboard',
     description: 'Mechanical',
     price: 20,
     category: 'ELECTRONICS',
-    inventoryCount: 30,
-    src: 'https://source.unsplash.com/random?Keyboard'
+    inventory: 30,
+    image: 'https://source.unsplash.com/random?Keyboard'
 },
 {
-    name: 'TV',
+    item: 'TV',
     description: 'Secreen',
     price: 150,
     category: 'ELECTRONICS',
-    inventoryCount: 10,
-    src: 'https://source.unsplash.com/random?TV'
+    inventory: 10,
+    image: 'https://source.unsplash.com/random?TV'
 },
 {
-    name: 'Mouse',
+    item: 'Mouse',
     description: 'Red Dragon',
     price: 20,
     category: 'ELECTRONICS',
-    inventoryCount: 3,
-    src: 'https://source.unsplash.com/random?Mouse'
+    inventory: 3,
+    image: 'https://source.unsplash.com/random?Mouse'
 }]
 let init = {
     products: [...food, ...elec],
@@ -50,36 +50,51 @@ export default (state = init, action) => {
     switch (type) {
         case 'SHOW':
             let showw = products.filter(item=>{
-                return item.category == payload && item.inventoryCount >0;
+                return item.category.toUpperCase() == payload && item.inventory >0;
             })
             return{products, show: showw, active: payload};
         case 'ADD':
             let newEdit = products.map(el => {
-                if (el.name === payload.name) {
-                    el.inventoryCount--
+                if (el.item === payload.item) {
+                    el.inventory--
                     console.log('in prod reduer add type', el);
                 }
                 return el;
             })
             let show2 = show.filter(item=>{
-                return item.inventoryCount >0;
+                return item.inventory >0;
             })
             return {products: newEdit, show: show2, active}
         case "DELETE":
             console.log('in the delete',payload);
             let newProd = products.map(el => {
-                if (el.name == payload.name) {
-                    let inv = init.products.filter(x => x.name == payload.name)
+                if (el.item == payload.item) {
+                    let inv = init.products.filter(x => x.item == payload.item)
                     console.log('asdasdasd',inv);
-                    el.inventoryCount++
+                    el.inventory++
                 }
                 return el;
             })
             let showw3= newProd.filter(item=>{
-                return item.category == active && item.inventoryCount >0;
+                return item.category == active && item.inventory >0;
             })
             console.log('in the delete',newProd);
             return {products: [...newProd], show: showw3, active}
+        case 'GET':
+            let arr = [...products, ...payload]
+            return {
+                products: arr,
+                show,
+                active
+            }
+        case 'PUT':
+            let arr2 = products.map(el => {
+                if(el.item == payload.item){
+                    return {...el, ...payload}
+                }
+                return el;
+            })
+            return { products: arr2, show, active}
         default:
             return state;
     }
