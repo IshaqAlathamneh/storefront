@@ -9,6 +9,7 @@ import { remove } from '../store/cart'
 import { toggle } from '../store/button'
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import {Link, BrowserRouter as Router} from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     title: {
         color: 'white',
@@ -57,6 +58,12 @@ export default function SimpleMenu(props) {
                         </MenuItem>)
                     })
                 }
+                <MenuItem key={data.items.length}>
+                    <Router>
+
+                <Link to="/payment">Show Details</Link>
+                    </Router>
+                </MenuItem>
             </Menu>
         </div>
     );

@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {Link, BrowserRouter as Router} from 'react-router-dom'
 import Cart from './cart';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
+    link: {
+      textDecoration: 'none',
+      color: 'white'
+    }
   }));
 
 export default function MenuAppBar() {
@@ -27,7 +30,11 @@ export default function MenuAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h3" className={classes.title}>
+            <Router>
+            <Link to="/" className={classes.link}>
             Ishaq's Store
+            </Link>
+            </Router>
           </Typography>
             <div>
               
